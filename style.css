@@ -115,6 +115,19 @@ nav ul li {
   margin: 0 auto;
 }
 
+.time-song {
+  display: flex;
+  width: 100%;
+}
+
+.time-song p {
+  display: flex;
+  color: var(--white);
+  min-width: 50px;
+  justify-content: center;
+  margin: 0 4px;
+}
+
 .bottom input[type="range"] {
   accent-color: var(--white);
   cursor: pointer;

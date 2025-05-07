@@ -48,6 +48,10 @@ const playInSongItem = document.querySelectorAll(".songList i.fa-circle-play");
 const divBottom = document.querySelector(".bottom");
 const songBanner = document.querySelector(".songBanner");
 const nameSongBanner = document.querySelector(".songBanner span");
+const currentMinute = document.querySelector(".current-time span:first-child");
+const currentSecond = document.querySelector(".current-time span:last-child");
+const endMinute = document.querySelector(".end-time span:first-child");
+const endSecond = document.querySelector(".end-time span:last-child");
 // Listen to document
 // Display the bottom
 function displayDivBottom() {
@@ -117,6 +121,7 @@ playInSongItem.forEach((item) => {
         audioElement = new Audio(`./assets/song/song${songId}.mp3`);
         audioElement.volume = volume.value / 100;
         audioElement.play();
+
         nameSongInSongBanner(); // take song name
         timeUpDate();
       }
@@ -144,6 +149,25 @@ function timeUpDate() {
   audioElement.addEventListener("timeupdate", () => {
     myProgressBar.value =
       (audioElement.currentTime / audioElement.duration) * 100;
+    // handler current song time
+    if (audioElement.currentTime % 60 < 60) {
+      if (audioElement.currentTime % 60 < 10) {
+        if (audioElement.currentTime % 60 < 1) {
+          currentSecond.innerText = "00";
+        } else {
+          currentSecond.innerText = (
+            parseInt(audioElement.currentTime % 60) / 100
+          )
+            .toString()
+            .split(".")[1];
+        }
+      } else {
+        currentSecond.innerText = parseInt(audioElement.currentTime % 60);
+      }
+      currentMinute.innerText = parseInt(audioElement.currentTime / 60);
+    }
+    endMinute.innerHTML = parseInt(audioElement.duration / 60);
+    endSecond.innerHTML = parseInt(audioElement.duration % 60);
     if (audioElement.ended) {
       pauseBtnSongItem();
       playMusicbtn.classList.replace("fa-circle-pause", "fa-circle-play");
