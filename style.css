@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Varela+Round&display=swap");
+
+:root {
+  --black: black;
+  --white: #fff;
+  --main-color: #1ad860;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  background-color: antiquewhite;
+}
+
+nav {
+  font-family: "Ubuntu", sans-serif;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  height: 65px;
+  background-color: var(--black);
+  color: var(--white);
+  align-items: center;
+}
+
+nav ul li {
+  padding: 0 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.3rem;
+}
+
+.brand img {
+  width: 54px;
+  padding: 0 8px;
+}
+
+.container {
+  height: 100vh;
+  background-color: var(--black);
+  margin: 10px auto;
+  padding: 20px;
+  width: 70%;
+  border-radius: 5px;
+}
+
+.container h1 {
+  color: var(--white);
+}
+
+.songList {
+  width: 60%;
+  margin: 40px auto;
+}
+
+.songItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  height: 60px;
+  margin-bottom: 10px;
+  padding: 8px 20px;
+  border-radius: 40px;
+  text-transform: capitalize;
+}
+
+.songItem i {
+  scale: 1;
+  transition: scale 0.1s ease;
+}
+
+.songItem i:hover {
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.songItem img {
+  width: 44px;
+  border-radius: 50%;
+}
+
+.songItem:hover :nth-child(2) {
+  color: var(--main-color);
+}
+
+.bottom {
+  display: flex;
+  position: sticky;
+  bottom: -1px;
+  height: 130px;
+  background-color: var(--black);
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 85vw;
+  margin: 0 auto;
+}
+
+.bottom input[type="range"] {
+  accent-color: var(--white);
+  cursor: pointer;
+  outline: none;
+}
+
+.bottom input[id="myProgressBar"] {
+  width: 100%;
+}
+
+.bottom input[type="range"]:hover {
+  accent-color: var(--main-color);
+}
+
+.bottom-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.bottom-item div {
+  text-align: center;
+  align-content: center;
+}
+
+.bottom .volume-container {
+  display: flex;
+  align-items: center;
+}
+
+.songBanner {
+  display: flex;
+  align-items: center;
+  color: var(--white);
+  text-transform: capitalize;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.songBanner img {
+  width: 70px;
+}
+
+.icons i {
+  color: var(--white);
+  font-size: 30px;
+  margin: 0 10px;
+  cursor: pointer;
+  scale: 1;
+  transition: scale 0.2s ease;
+}
+
+.icons i:hover {
+  scale: 0.99;
+}
+
+.volume-container {
+  display: grid;
+  justify-content: end;
+  accent-color: var(--white);
+  outline: none;
+}
+
+.volume-container i {
+  color: var(--white);
+  display: block;
+  width: 50px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Mobile < 739px*/
+@media screen and (max-width: 46.1875em) {
+  .container {
+    width: 97%;
+  }
+  .container h1 {
+    text-align: center;
+  }
+
+  .songList {
+    width: 98%;
+  }
+}
+
+/* Tablet from 740px to 900px*/
+@media screen and (min-width: 46.25em) and (max-width: 56.25em) {
+  .container {
+    width: 90%;
+  }
+
+  .container h1 {
+    text-align: center;
+  }
+
+  .songList {
+    width: 80%;
+  }
+
+  .songBanner div {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 50%;
+  }
+
+  .songBanner span {
+    position: relative;
+    display: block;
+    width: 100px;
+    white-space: nowrap;
+    animation: linearRunText 5s linear infinite;
+  }
+
+  @keyframes linearRunText {
+    0% {
+      left: 200px;
+      top: 0px;
+    }
+    100% {
+      left: -200px;
+      top: 0px;
+    }
+  }
+}
+
+@media screen and (min-width: 56.3125em) and (max-width: 63.9375em) {
+  .container {
+    width: 90%;
+  }
+
+  .container h1 {
+    text-align: center;
+  }
+
+  .songList {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 64em) {
+}
