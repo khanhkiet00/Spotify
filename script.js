@@ -1,4 +1,5 @@
 const songContainer = document.querySelector(".songList");
+const songRecommended = document.querySelector(".recommended");
 const myProgressBar = document.getElementById("myProgressBar");
 const volume = document.querySelector("#volume");
 const imgVolume = document.querySelector(".volume-container i");
@@ -33,13 +34,30 @@ let songs = [
   },
 ];
 
+let songsRecommended = [
+  {
+    id: "4",
+    songName: "24h",
+    filePath: "./assets/song/song4.mp3",
+    img: "./assets/img/songLogo/song5.jfif",
+  },
+  {
+    id: "5",
+    songName: "sinh ra đã là thứ đối lập nhau",
+    filePath: "./assets/song/song5.mp3",
+    img: "./assets/img/songLogo/song6.jfif",
+  },
+];
+
 // startApp
 function startApp() {
   renderListSong();
+  renderListSongRecommended();
 }
 
 startApp();
 
+console.log([myProgressBar]);
 const playMusicbtn = document.getElementById("playmusic");
 const forWardBtn = document.querySelector(".forward");
 const backWardBtn = document.querySelector(".backward");
@@ -50,6 +68,7 @@ const songBanner = document.querySelector(".songBanner");
 const nameSongBanner = document.querySelector(".songBanner span");
 const currentMinute = document.querySelector(".current-time span:first-child");
 const currentSecond = document.querySelector(".current-time span:last-child");
+const endTime = document.querySelector(".end-time");
 const endMinute = document.querySelector(".end-time span:first-child");
 const endSecond = document.querySelector(".end-time span:last-child");
 // Listen to document
@@ -166,8 +185,10 @@ function timeUpDate() {
       }
       currentMinute.innerText = parseInt(audioElement.currentTime / 60);
     }
-    endMinute.innerHTML = parseInt(audioElement.duration / 60);
-    endSecond.innerHTML = parseInt(audioElement.duration % 60);
+
+    // habdlerSongTime();
+    habdlerSongTime();
+
     if (audioElement.ended) {
       pauseBtnSongItem();
       playMusicbtn.classList.replace("fa-circle-pause", "fa-circle-play");
@@ -184,6 +205,7 @@ function timeUpDate() {
             "fa-circle-play",
             "fa-circle-pause"
           );
+
         timeUpDate();
         nameSongInSongBanner();
         songBanner.style.opacity = 1;
@@ -325,6 +347,29 @@ function renderListSong() {
   }
 }
 
+function renderListSongRecommended() {
+  for (var i = 0; i < songsRecommended.length; i++) {
+    var div = document.createElement("div");
+    div.setAttribute("id", `${songsRecommended[i].id}`);
+    div.classList.add("songItem");
+    songRecommended.appendChild(div);
+    document.getElementById(
+      `${songsRecommended[i].id}`
+    ).innerHTML = `<img src="${songsRecommended[i].img}" alt="" />
+          <span>${songsRecommended[i].songName}</span>
+          <span> <i class="fa-regular fa-circle-play"></i></span>`;
+  }
+}
+
 function nameSongInSongBanner() {
   nameSongBanner.innerText = songs[songId].songName;
+}
+
+// handler song time
+
+function habdlerSongTime() {
+  if (!isNaN(audioElement.duration)) {
+    endMinute.innerHTML = parseInt(audioElement.duration / 60);
+    endSecond.innerHTML = parseInt(audioElement.duration % 60);
+  }
 }

@@ -48,7 +48,6 @@ nav ul li {
 }
 
 .container {
-  height: 100vh;
   background-color: var(--black);
   margin: 10px auto;
   padding: 20px;
@@ -60,6 +59,7 @@ nav ul li {
   color: var(--white);
 }
 
+.recommended,
 .songList {
   width: 60%;
   margin: 40px auto;
@@ -147,6 +147,7 @@ nav ul li {
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   margin-top: 12px;
+  padding: 0 58px 0 36px;
 }
 
 .bottom-item div {
