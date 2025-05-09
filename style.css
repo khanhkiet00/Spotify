@@ -92,8 +92,33 @@ nav ul li {
   border-radius: 50%;
 }
 
-.songItem:hover :nth-child(2) {
+.opacity08,
+.songItem:hover {
+  opacity: 0.8;
+}
+
+.songItem:hover .songList-item :first-child {
   color: var(--main-color);
+}
+
+.songList-item p {
+  text-align: center;
+}
+
+.recommended {
+  position: relative;
+}
+
+.recommended .songItem:hover .recommended-icon {
+  display: block;
+}
+
+.recommended .recommended-icon {
+  position: absolute;
+  font-size: 20px;
+  left: 36px;
+  color: var(--main-color);
+  display: none;
 }
 
 .bottom {
@@ -102,8 +127,9 @@ nav ul li {
   bottom: -1px;
   height: 130px;
   background-color: var(--black);
-  opacity: 0;
-  transition: opacity 0.3s ease-in;
+  display: none;
+  /* opacity: 0;
+  transition: opacity 0.3s ease-in; */
 }
 
 .bottom-container {

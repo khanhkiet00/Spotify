@@ -13,24 +13,28 @@ let songs = [
     songName: "Phía sau lưng anh có ai kia",
     filePath: "./assets/song/song0.mp3",
     img: "./assets/img/songLogo/TBT.jfif",
+    author: "Thiều Bảo Trâm",
   },
   {
     id: "1",
     songName: "wrong times",
     filePath: "./assets/song/song1.mp3",
     img: "./assets/img/songLogo/song2.jfif",
+    author: "Puppy, Dangrangto",
   },
   {
     id: "2",
     songName: "nến và hoa",
     filePath: "./assets/song/song2.mp3",
     img: "./assets/img/songLogo/song3.jfif",
+    author: "Rhymatics",
   },
   {
     id: "3",
     songName: "Giá như",
     filePath: "./assets/song/song3.mp3",
     img: "./assets/img/songLogo/song4.jfif",
+    author: "Soobin Hoàng Sơn",
   },
 ];
 
@@ -40,12 +44,14 @@ let songsRecommended = [
     songName: "24h",
     filePath: "./assets/song/song4.mp3",
     img: "./assets/img/songLogo/song5.jfif",
+    author: "Lyly",
   },
   {
     id: "5",
     songName: "sinh ra đã là thứ đối lập nhau",
     filePath: "./assets/song/song5.mp3",
     img: "./assets/img/songLogo/song6.jfif",
+    author: "Da LAB",
   },
 ];
 
@@ -57,7 +63,6 @@ function startApp() {
 
 startApp();
 
-console.log([myProgressBar]);
 const playMusicbtn = document.getElementById("playmusic");
 const forWardBtn = document.querySelector(".forward");
 const backWardBtn = document.querySelector(".backward");
@@ -74,7 +79,7 @@ const endSecond = document.querySelector(".end-time span:last-child");
 // Listen to document
 // Display the bottom
 function displayDivBottom() {
-  divBottom.style.opacity = 1;
+  divBottom.style.display = "flex";
 }
 
 // Event onclick playmusic
@@ -334,17 +339,39 @@ function changeVolumeIcon(volume) {
 }
 
 function renderListSong(listSong, container) {
-  for (var i = 0; i < listSong.length; i++) {
-    var div = document.createElement("div");
-    div.setAttribute("id", `${listSong[i].id}`);
+  listSong.forEach((song) => {
+    const div = document.createElement("div");
+    div.id = song.id;
     div.classList.add("songItem");
+
+    // Thêm thẻ i nếu là recommended
+    if (container === songRecommended) {
+      var iconHTML = `<i class="fa-solid fa-play recommended-icon"></i>`;
+      var addSong = `<i class="fa-solid fa-plus"></i>`;
+      var playIcon = "";
+    } else {
+      var playIcon = `<span><i class="fa-regular fa-circle-play"></i></span>`;
+      var iconHTML = "";
+      var addSong = "";
+    }
+    div.innerHTML = `
+      ${iconHTML}
+      ${codeRenderHTML(song)}
+      ${playIcon}
+      ${addSong}
+    `;
     container.appendChild(div);
-    document.getElementById(
-      `${listSong[i].id}`
-    ).innerHTML = `<img src="${listSong[i].img}" alt="" />
-          <span>${listSong[i].songName}</span>
-          <span> <i class="fa-regular fa-circle-play"></i></span>`;
-  }
+  });
+}
+
+function codeRenderHTML(song) {
+  return `
+    <img src="${song.img}" alt="" />
+    <div class="songList-item">
+      <p>${song.songName}</p>
+      <p class="opacity08">${song.author}</p>
+    </div>
+  `;
 }
 
 function nameSongInSongBanner() {
