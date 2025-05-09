@@ -51,8 +51,8 @@ let songsRecommended = [
 
 // startApp
 function startApp() {
-  renderListSong();
-  renderListSongRecommended();
+  renderListSong(songs, songContainer);
+  renderListSong(songsRecommended, songRecommended);
 }
 
 startApp();
@@ -333,30 +333,16 @@ function changeVolumeIcon(volume) {
   }
 }
 
-function renderListSong() {
-  for (var i = 0; i < songs.length; i++) {
+function renderListSong(listSong, container) {
+  for (var i = 0; i < listSong.length; i++) {
     var div = document.createElement("div");
-    div.setAttribute("id", `${songs[i].id}`);
+    div.setAttribute("id", `${listSong[i].id}`);
     div.classList.add("songItem");
-    songContainer.appendChild(div);
+    container.appendChild(div);
     document.getElementById(
-      `${songs[i].id}`
-    ).innerHTML = `<img src="${songs[i].img}" alt="" />
-          <span>${songs[i].songName}</span>
-          <span> <i class="fa-regular fa-circle-play"></i></span>`;
-  }
-}
-
-function renderListSongRecommended() {
-  for (var i = 0; i < songsRecommended.length; i++) {
-    var div = document.createElement("div");
-    div.setAttribute("id", `${songsRecommended[i].id}`);
-    div.classList.add("songItem");
-    songRecommended.appendChild(div);
-    document.getElementById(
-      `${songsRecommended[i].id}`
-    ).innerHTML = `<img src="${songsRecommended[i].img}" alt="" />
-          <span>${songsRecommended[i].songName}</span>
+      `${listSong[i].id}`
+    ).innerHTML = `<img src="${listSong[i].img}" alt="" />
+          <span>${listSong[i].songName}</span>
           <span> <i class="fa-regular fa-circle-play"></i></span>`;
   }
 }
@@ -366,7 +352,6 @@ function nameSongInSongBanner() {
 }
 
 // handler song time
-
 function habdlerSongTime() {
   if (!isNaN(audioElement.duration)) {
     endMinute.innerHTML = parseInt(audioElement.duration / 60);

@@ -147,7 +147,7 @@ nav ul li {
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   margin-top: 12px;
-  padding: 0 58px 0 36px;
+  padding: 0 58px 0 58px;
 }
 
 .bottom-item div {
@@ -169,11 +169,15 @@ nav ul li {
   transition: opacity 0.3s ease-in;
 }
 
-.songBanner img {
+.songBanner .gif {
   width: 70px;
+  margin: 0 0 0 -22px;
 }
 
 .icons i {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
   color: var(--white);
   font-size: 30px;
   margin: 0 10px;
