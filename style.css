@@ -78,13 +78,13 @@ nav ul li {
 }
 
 .songItem i {
-  scale: 1;
+  scale: 1.5;
   transition: scale 0.1s ease;
 }
 
 .songItem i:hover {
   cursor: pointer;
-  scale: 1.1;
+  scale: 1.6;
 }
 
 .songItem img {
@@ -116,7 +116,7 @@ nav ul li {
 .recommended .recommended-icon {
   position: absolute;
   font-size: 20px;
-  left: 36px;
+  left: 37px;
   color: var(--main-color);
   display: none;
 }
