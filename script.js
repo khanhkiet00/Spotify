@@ -179,10 +179,10 @@ function timeUpDate() {
 // onclick songItem
 songList.forEach((item) => {
   // Detected mouseright
-  item.oncontextmenu = (e) => {
-    e.preventDefault();
-    console.log(item);
-  };
+  // item.oncontextmenu = (e) => {
+  //   e.preventDefault();
+  //   console.log(item);
+  // };
 
   item.onclick = (e) => {
     playSongList(e);
@@ -318,7 +318,10 @@ function codeRenderHTML(song) {
 }
 
 function nameSongInSongBanner() {
-  nameSongBanner.innerText = songs[songId].songName;
+  var findsong = songs.find((value) => {
+    return value.id == songId;
+  });
+  nameSongBanner.innerText = findsong.songName;
 }
 
 // handler song time
@@ -381,7 +384,6 @@ function handlerSongTime(timeType, secondElement, minuteElement) {
 // }
 
 function playSongList(e) {
-  console.log(e.target);
   if (!audioElement.paused) {
     audioElement.pause();
   }
