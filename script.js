@@ -78,12 +78,15 @@ let endTime = document.querySelector(".end-time");
 let endMinute = document.querySelector(".end-time span:first-child");
 let endSecond = document.querySelector(".end-time span:last-child");
 
-playMusicbtn = document.getElementById("playmusic");
 // Listen to document
 // Display the bottom
 function displayDivBottom() {
   divBottom.style.display = "flex";
 }
+
+document.oncontextmenu = (e) => {
+  // e.preventDefault();
+};
 
 // Event onclick playmusic
 playMusicbtn.onclick = (e) => {
@@ -110,18 +113,10 @@ playMusicbtn.onclick = (e) => {
 
 // pause btn songitem
 function pauseBtnSongItem() {
-  console.log(playInSongItem);
   playInSongItem.forEach((element) => {
     element.classList.replace("fa-circle-pause", "fa-circle-play");
   });
 }
-
-// click songitem
-playInSongItem.forEach((item) => {
-  item.onclick = (e) => {
-    playBtnSongList(e);
-  };
-});
 
 // listen event forward
 forWardBtn.onclick = () => {
@@ -183,15 +178,24 @@ function timeUpDate() {
 
 // onclick songItem
 songList.forEach((item) => {
+  // Detected mouseright
+  // item.oncontextmenu = (e) => {
+  //   e.preventDefault();
+  //   console.log(item);
+  // };
+
+  // Detected mouseleft
   item.onclick = (e) => {
     if (!audioElement.paused) {
       audioElement.pause();
     }
     displayDivBottom();
-    if (e.target.lastChild.lastChild.classList.contains("fa-circle-play")) {
+    if (
+      e.target.lastElementChild.firstChild.classList.contains("fa-circle-play")
+    ) {
       // Change btn
       pauseBtnSongItem(); //btn pause all
-      e.target.lastChild.lastChild.classList.replace(
+      e.target.lastElementChild.firstChild.classList.replace(
         "fa-circle-play",
         "fa-circle-pause"
       ); // play btn click
@@ -213,7 +217,7 @@ songList.forEach((item) => {
       songBanner.style.opacity = 1;
     } else {
       songBanner.style.opacity = 0;
-      e.target.lastChild.lastChild.classList.replace(
+      e.target.lastElementChild.firstChild.classList.replace(
         "fa-circle-pause",
         "fa-circle-play"
       );
@@ -352,7 +356,7 @@ function codeRenderHTML(song) {
     <img src="${song.img}" alt="" />
     <div class="songList-item">
       <p>${song.songName}</p>
-      <p class="opacity08">${song.author}</p>
+      <p class="opacity08"><a href="http://127.0.0.1:5500/">${song.author}</a></p>
     </div>
   `;
 }
@@ -383,39 +387,39 @@ function handlerSongTime(timeType, secondElement, minuteElement) {
   }
 }
 
-function playBtnSongList(e) {
-  // stop propagation event
-  e.stopPropagation();
-  // stop old music
-  if (!audioElement.paused) {
-    audioElement.pause();
-  }
-  displayDivBottom();
-  if (e.target.classList.contains("fa-circle-play")) {
-    // Change btn
-    pauseBtnSongItem(); //btn pause all
-    e.target.classList.replace("fa-circle-play", "fa-circle-pause"); // play btn click
-    playMusicbtn.classList.replace("fa-circle-play", "fa-circle-pause"); //play main btn
+// function playBtnSongList(e) {
+//   // stop propagation event
+//   e.stopPropagation();
+//   // stop old music
+//   if (!audioElement.paused) {
+//     audioElement.pause();
+//   }
+//   displayDivBottom();
+//   if (e.target.classList.contains("fa-circle-play")) {
+//     // Change btn
+//     pauseBtnSongItem(); //btn pause all
+//     e.target.classList.replace("fa-circle-play", "fa-circle-pause"); // play btn click
+//     playMusicbtn.classList.replace("fa-circle-play", "fa-circle-pause"); //play main btn
 
-    // take ID when click on the songItem
-    if (songId == e.target.parentElement.parentElement.getAttribute("id")) {
-      audioElement.play();
-      timeUpDate();
-    } else {
-      // take new id to play new music
-      songId = e.target.parentElement.parentElement.getAttribute("id");
-      audioElement = new Audio(`./assets/song/song${songId}.mp3`);
-      audioElement.volume = volume.value / 100;
-      audioElement.play();
-      // console.log(songId);
-      nameSongInSongBanner(); // take song name
-      timeUpDate();
-    }
-    songBanner.style.opacity = 1;
-  } else {
-    songBanner.style.opacity = 0;
-    e.target.classList.replace("fa-circle-pause", "fa-circle-play");
-    playMusicbtn.classList.replace("fa-circle-pause", "fa-circle-play");
-    audioElement.pause();
-  }
-}
+//     // take ID when click on the songItem
+//     if (songId == e.target.parentElement.parentElement.getAttribute("id")) {
+//       audioElement.play();
+//       timeUpDate();
+//     } else {
+//       // take new id to play new music
+//       songId = e.target.parentElement.parentElement.getAttribute("id");
+//       audioElement = new Audio(`./assets/song/song${songId}.mp3`);
+//       audioElement.volume = volume.value / 100;
+//       audioElement.play();
+//       // console.log(songId);
+//       nameSongInSongBanner(); // take song name
+//       timeUpDate();
+//     }
+//     songBanner.style.opacity = 1;
+//   } else {
+//     songBanner.style.opacity = 0;
+//     e.target.classList.replace("fa-circle-pause", "fa-circle-play");
+//     playMusicbtn.classList.replace("fa-circle-pause", "fa-circle-play");
+//     audioElement.pause();
+//   }
+// }

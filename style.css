@@ -77,19 +77,23 @@ nav ul li {
   text-transform: capitalize;
 }
 
-.songItem i {
-  scale: 1.5;
-  transition: scale 0.1s ease;
+.songItem span {
+  pointer-events: none;
 }
 
-.songItem i:hover {
+.songItem i {
+  scale: 1.5;
+}
+
+/* .songItem i:hover {
   cursor: pointer;
   scale: 1.6;
-}
+} */
 
 .songItem img {
   width: 44px;
   border-radius: 50%;
+  pointer-events: none;
 }
 
 .opacity08,
@@ -97,11 +101,16 @@ nav ul li {
   opacity: 0.8;
 }
 
-.songItem:hover .songList-item :first-child {
+.songItem:hover .songList-item p:first-child {
   color: var(--main-color);
 }
 
+.songList-item {
+  pointer-events: none;
+}
+
 .songList-item p {
+  outline: none;
   text-align: center;
 }
 
