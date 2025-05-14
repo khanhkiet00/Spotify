@@ -381,6 +381,7 @@ function handlerSongTime(timeType, secondElement, minuteElement) {
 // }
 
 function playSongList(e) {
+  console.log(e.target);
   if (!audioElement.paused) {
     audioElement.pause();
   }
