@@ -179,51 +179,13 @@ function timeUpDate() {
 // onclick songItem
 songList.forEach((item) => {
   // Detected mouseright
-  // item.oncontextmenu = (e) => {
-  //   e.preventDefault();
-  //   console.log(item);
-  // };
+  item.oncontextmenu = (e) => {
+    e.preventDefault();
+    console.log(item);
+  };
 
-  // Detected mouseleft
   item.onclick = (e) => {
-    if (!audioElement.paused) {
-      audioElement.pause();
-    }
-    displayDivBottom();
-    if (
-      e.target.lastElementChild.firstChild.classList.contains("fa-circle-play")
-    ) {
-      // Change btn
-      pauseBtnSongItem(); //btn pause all
-      e.target.lastElementChild.firstChild.classList.replace(
-        "fa-circle-play",
-        "fa-circle-pause"
-      ); // play btn click
-      playMusicbtn.classList.replace("fa-circle-play", "fa-circle-pause"); //play main btn
-
-      // take ID when click on the songItem
-      if (songId == e.target.getAttribute("id")) {
-        audioElement.play();
-        timeUpDate();
-      } else {
-        // take new id to play new music
-        songId = e.target.getAttribute("id");
-        audioElement = new Audio(`./assets/song/song${songId}.mp3`);
-        audioElement.volume = volume.value / 100;
-        audioElement.play();
-        nameSongInSongBanner(); // take song name
-        timeUpDate();
-      }
-      songBanner.style.opacity = 1;
-    } else {
-      songBanner.style.opacity = 0;
-      e.target.lastElementChild.firstChild.classList.replace(
-        "fa-circle-pause",
-        "fa-circle-play"
-      );
-      playMusicbtn.classList.replace("fa-circle-pause", "fa-circle-play");
-      audioElement.pause();
-    }
+    playSongList(e);
   };
 });
 
@@ -302,18 +264,12 @@ addSongtoList.forEach((item) => {
         addSong(item, songContainer);
         //delete song in songsRecommended
         songsRecommended.splice(songsRecommended.indexOf(item), 1);
-        playInSongItem = document.querySelectorAll(".songList i");
-        // click songitem
-        playInSongItem.forEach((item) => {
-          item.onclick = (e) => {
-            playBtnSongList(e);
-          };
-        });
         songList = document.querySelectorAll(".songItem");
+        playInSongItem = document.querySelectorAll(".songList i");
         // onclick songItem
         songList.forEach((item) => {
           item.onclick = (e) => {
-            // playBtnSongList(e);
+            playSongList(e);
           };
         });
       }
@@ -423,3 +379,45 @@ function handlerSongTime(timeType, secondElement, minuteElement) {
 //     audioElement.pause();
 //   }
 // }
+
+function playSongList(e) {
+  if (!audioElement.paused) {
+    audioElement.pause();
+  }
+  displayDivBottom();
+  if (
+    e.target.lastElementChild.firstChild.classList.contains("fa-circle-play")
+  ) {
+    // Change btn
+    pauseBtnSongItem(); //btn pause all
+    e.target.lastElementChild.firstChild.classList.replace(
+      "fa-circle-play",
+      "fa-circle-pause"
+    );
+
+    playMusicbtn.classList.replace("fa-circle-play", "fa-circle-pause"); //play main btn
+
+    // take ID when click on the songItem
+    if (songId == e.target.getAttribute("id")) {
+      audioElement.play();
+      timeUpDate();
+    } else {
+      // take new id to play new music
+      songId = e.target.getAttribute("id");
+      audioElement = new Audio(`./assets/song/song${songId}.mp3`);
+      audioElement.volume = volume.value / 100;
+      audioElement.play();
+      nameSongInSongBanner(); // take song name
+      timeUpDate();
+    }
+    songBanner.style.opacity = 1;
+  } else {
+    songBanner.style.opacity = 0;
+    e.target.lastElementChild.firstChild.classList.replace(
+      "fa-circle-pause",
+      "fa-circle-play"
+    );
+    playMusicbtn.classList.replace("fa-circle-pause", "fa-circle-play");
+    audioElement.pause();
+  }
+}
